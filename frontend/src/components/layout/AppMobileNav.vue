@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { LayoutDashboard, TrendingUp, Plus, TrendingDown, ChartPie } from 'lucide-vue-next'
+import { LayoutDashboard, TrendingUp, Plus, TrendingDown, ChartPie, Tags } from 'lucide-vue-next'
 import { useUiStore } from '@/stores/ui'
 
 const ui = useUiStore()
@@ -10,6 +10,7 @@ const nav = [
   { to: '/income', label: 'Доходы', icon: TrendingUp },
   { to: '/expenses', label: 'Расходы', icon: TrendingDown },
   { to: '/analytics', label: 'Анализ', icon: ChartPie },
+  { to: '/categories', label: 'Категории', icon: Tags },
 ]
 </script>
 
@@ -28,7 +29,7 @@ const nav = [
       <RouterLink
         :to="item.to"
         :class="[
-          'flex flex-1 flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium',
+          'flex flex-1 flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium whitespace-nowrap',
           ($route.path === item.to || (!item.exact && $route.path.startsWith(item.to)))
             ? 'text-indigo-600'
             : 'text-slate-400',
