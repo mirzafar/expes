@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import auth, categories, health, stats, transactions
@@ -33,11 +33,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(health.router)
-app.include_router(auth.router)
-app.include_router(transactions.router)
-app.include_router(stats.router)
-app.include_router(categories.router)
+# Все эндпоинты живут под /api — nginx проксирует /api/ → uvicorn как есть
+api_router = APIRouter(prefix="/api")
+api_router.include_router(health.router)
+api_router.include_router(auth.router)
+api_router.include_router(transactions.router)
+api_router.include_router(stats.router)
+api_router.include_router(categories.router)
+
+app.include_router(api_router)
 
 
 @app.get("/")
