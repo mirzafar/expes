@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+
+/* === Дизайн-токены (Tailwind v4, CSS-first) === */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', 'Inter Variable', ui-sans-serif, sans-serif;
+
+  /* Мягкая тень для карточек */
+  --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-soft: 0 4px 16px -2px rgb(15 23 42 / 0.08);
+}
+
+/* === База === */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans;
+  }
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+/* === Переиспользуемые классы-утилиты === */
+@layer components {
+  .card {
+    @apply bg-white border border-slate-200/80 rounded-2xl;
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-ghost,
+  .btn-soft {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5
+           text-sm font-semibold transition-colors disabled:opacity-50
+           disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply bg-indigo-600 text-white hover:bg-indigo-700;
+  }
+  .btn-ghost {
+    @apply text-slate-600 hover:bg-slate-100;
+  }
+  .btn-soft {
+    @apply bg-indigo-50 text-indigo-700 hover:bg-indigo-100;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5
+           text-sm text-slate-900 placeholder:text-slate-400
+           focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10
+           focus:outline-none transition;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1.5;
+  }
+}
+
+/* Плавная прокрутка и аккуратный скроллбар */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(203 213 225) transparent;
+}
