@@ -18,7 +18,7 @@ email-validator = "==2.2.0"
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+python_version = "3.10"
 
 [scripts]
 dev = "uvicorn app.main:app --reload --port 8000"
